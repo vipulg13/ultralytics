@@ -304,8 +304,8 @@ class ConfusionMatrix:
                        fmt='.2f' if normalize else '.0f',
                        square=True,
                        vmin=0.0,
-                       xticklabels=12,
-                       yticklabels=12).set_facecolor((1, 1, 1))
+                       xticklabels=ticklabels,
+                       yticklabels=ticklabels).set_facecolor((1, 1, 1))
         title = 'Confusion Matrix' + ' Normalized' * normalize
         ax.set_xlabel('True')
         ax.set_ylabel('Predicted')
