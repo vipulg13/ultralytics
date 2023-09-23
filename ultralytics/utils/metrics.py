@@ -283,12 +283,14 @@ class ConfusionMatrix:
         sn.set(font_scale=1.0 if nc < 50 else 0.8)  # for label size
         labels = (0 < nn < 99) and (nn == nc)  # apply names to ticklabels
         ticklabels = (list(names) + ['background']) if labels else 'auto'
+        
         for index_rem in range(0, nc - 1):
             if not np.any(array[index_rem,:]):
                 if not np.any(array[:,index_rem]):
                     array = np.delete(array, index_rem, axis=0)
                     array = np.delete(array, index_rem, axis=1)
                     del ticklabels[index_rem]
+        
         with warnings.catch_warnings():
             warnings.simplefilter('ignore')  # suppress empty matrix RuntimeWarning: All-NaN slice encountered
             sn.heatmap(array,
