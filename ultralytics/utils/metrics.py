@@ -285,8 +285,10 @@ class ConfusionMatrix:
         ticklabels = (list(names) + ['background']) if labels else 'auto'
         
         for index_rem in range(0, nc - 1):
-            if not np.any(array[index_rem,:]):
-                if not np.any(array[:,index_rem]):
+            #if not np.any(array[index_rem,:]):
+            if np.isnan(array[index_rem,:]).all():
+                if np.isnan(array[:,index_rem]).all():
+                #if not np.any(array[:,index_rem]):
                     array = np.delete(array, index_rem, axis=0)
                     array = np.delete(array, index_rem, axis=1)
                     del ticklabels[index_rem]
