@@ -284,14 +284,17 @@ class ConfusionMatrix:
         labels = (0 < nn < 99) and (nn == nc)  # apply names to ticklabels
         ticklabels = (list(names) + ['background']) if labels else 'auto'
         
-        for index_rem in range(0, nc - 1):
-            #if not np.any(array[index_rem,:]):
-            if np.isnan(array[index_rem,:]).all():
-                if np.isnan(array[:,index_rem]).all():
-                #if not np.any(array[:,index_rem]):
-                    array = np.delete(array, index_rem, axis=0)
-                    array = np.delete(array, index_rem, axis=1)
-                    del ticklabels[index_rem]
+        index_rem = 0
+        for index in range(0,nc-1):
+            if not np.any(array[index_rem,:]) and not np.any(array[:,index_rem]):
+            #if np.isnan(array[index_rem,:]).all():
+                #if np.isnan(array[:,index_rem]).all():
+                array = np.delete(array, index_rem, axis=0)
+                array = np.delete(array, index_rem, axis=1)
+                del ticklabels[index_rem]
+            else:
+                index_rem = index_rem + 1
+                
         
         with warnings.catch_warnings():
             warnings.simplefilter('ignore')  # suppress empty matrix RuntimeWarning: All-NaN slice encountered
