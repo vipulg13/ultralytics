@@ -286,7 +286,7 @@ class ConfusionMatrix:
         
         index_rem = 0
         for index in range(0,nc-1):
-            if not np.any(array[index_rem,:]) and not np.any(array[:,index_rem]):
+            if np.isnan(array[index_rem,:]).all() and np.isnan(array[:,index_rem]).all():
             #if np.isnan(array[index_rem,:]).all():
                 #if np.isnan(array[:,index_rem]).all():
                 array = np.delete(array, index_rem, axis=0)
@@ -295,7 +295,6 @@ class ConfusionMatrix:
             else:
                 index_rem = index_rem + 1
                 
-        
         with warnings.catch_warnings():
             warnings.simplefilter('ignore')  # suppress empty matrix RuntimeWarning: All-NaN slice encountered
             sn.heatmap(array,
