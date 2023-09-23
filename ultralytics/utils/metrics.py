@@ -287,11 +287,9 @@ class ConfusionMatrix:
         index_rem = 0
         for index in range(0,68):
             if np.isnan(array[index_rem,:]).all() and np.isnan(array[:,index_rem]).all():
-            #if np.isnan(array[index_rem,:]).all():
-                #if np.isnan(array[:,index_rem]).all():
                 array = np.delete(array, index_rem, axis=0)
                 array = np.delete(array, index_rem, axis=1)
-                del ticklabels[index_rem]
+                ticklabels.pop(index_rem)
             else:
                 index_rem = index_rem + 1
 
